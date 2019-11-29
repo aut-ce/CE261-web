@@ -1,0 +1,46 @@
+{
+  "id": "6180a",
+  "title": "خانه ۴ خوابه در الهییه",
+  "price": 29000000000.0,
+  "area": 350,
+  "bedrooms": 4,
+  "parkings": 1,
+  "type": "مسکونی",
+  "location": {
+    "locality": "الهیه",
+    "lat": 23.45454,
+    "long": 37.474742
+  },
+  "breadcrumb": [
+    {
+      "name": "خرید"
+    },
+    {
+      "name": "شهر تهران"
+    },
+    {
+      "name": "منطقه ۱"
+    },
+    {
+      "name": "الهییه"
+    }
+  ],
+  "pic": {
+    "number": 5,
+    "images": [
+      "http://someimage.com/a1.jpg",
+      "http://someimage.com/a2.jpg",
+      "http://someimage.com/a3.jpg",
+      "http://someimage.com/a4.jpg",
+      "http://someimage.com/a5.jpg"
+    ]
+  },
+  "estate": {
+    "name": "باراد",
+    "phone": "09122343257",
+    "logo": "http://someimage.com/logo.png"
+  },
+  "star": true,
+  "bookmarked": false,
+  "created_at": 1574836689
+}

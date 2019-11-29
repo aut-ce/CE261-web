@@ -1,0 +1,53 @@
+{
+  "section": "اکازیون های امروز کیلید",
+  "action": {
+    "text": "همه‌ی اکازیون های کیلید",
+    "url": "https://someaction.com"
+  },
+  "items": [
+      {
+        "id": "6180a",
+        "title": "خانه ۴ خوابه در الهییه",
+        "price": 29000000000.0,
+        "type": "مسکونی",
+        "area": 350,
+        "bedrooms": 4,
+        "location": {
+          "locality": "الهیه"
+        },
+        "pic": {
+          "number": 5,
+          "image": "http://someimage.com/a.jpg"
+        },
+        "estate": {
+          "name": "باراد",
+          "logo": "http://someimage.com/logo.png"
+        },
+        "star": true,
+        "bookmarked": false,
+        "created_at": 1574836689
+      },
+      {
+        "id": "497f2",
+        "title": "خانه ۴ خوابه در الهییه",
+        "price": 18000000000.0,
+        "area": 171,
+        "bedrooms": 2,
+        "type": "مسکونی",
+        "location": {
+          "locality": "شهرک غرب"
+        },
+        "pic": {
+          "number": 18,
+          "image": "http://someimage.com/b.jpg"
+        },
+        "estate": {
+          "name": "باراد",
+          "logo": "http://someimage.com/logo2.png"
+        },
+        "star": false,
+        "bookmarked": true,
+        "created_at": 1574836689
+      }
+    ]
+}
