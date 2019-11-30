@@ -16,8 +16,8 @@ services:
     build:
       context: .
       dockerfile: nginx/Dockerfile
-    image: echo-nginx
-    container_name: echo-nginx
+    image: web101-nginx
+    container_name: web101-nginx
     ports:
       - 80:80
     networks:
