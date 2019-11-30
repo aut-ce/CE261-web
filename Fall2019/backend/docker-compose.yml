@@ -4,11 +4,11 @@ services:
   go:
     build:
       context: .
-      dockerfile: ./Dockerfile
+      dockerfile: server/Dockerfile
     image: web101-server
     container_name: web101-server
-    ports:
-      - 80:80
+    volumes:
+      - ./server/data:/go/src/web101/data
     networks:
       - web101
 
