@@ -5,11 +5,6 @@ import (
 	"net/http"
 
 	"github.com/labstack/echo"
-
-	"context"
-	"go.mongodb.org/mongo-driver/mongo"
-	"go.mongodb.org/mongo-driver/mongo/options"
-	"log"
 )
 
 func main() {
@@ -34,25 +29,6 @@ func main() {
 	e.GET("/mags", func(c echo.Context) error {
 		return c.File("./data/mags.json")
 	})
-
-	// Set client options
-	clientOptions := options.Client().ApplyURI("mongodb://web101-mongo:27017")
-
-	// Connect to MongoDB
-	_, err := mongo.Connect(context.TODO(), clientOptions)
-
-	if err != nil {
-		log.Fatal(err)
-	}
-	//// Check the connection
-	//go func() {
-	//	err = client.Ping(context.TODO(), nil)
-	//
-	//	if err != nil {
-	//		log.Fatal(err)
-	//	}
-	//	fmt.Println("Connected to MongoDB!")
-	//}()
 
 	e.Logger.Fatal(e.Start(":80"))
 }
