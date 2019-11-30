@@ -11,6 +11,8 @@ services:
       - "./server/data:/go/src/web101/data"
     networks:
       - web101
+    extra_hosts:
+      - "local:192.168.64.1"
 
   nginx:
     build:
