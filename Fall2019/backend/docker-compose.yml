@@ -11,8 +11,8 @@ services:
       - "./server/data:/go/src/web101/data"
     networks:
       - web101
-    extra_hosts:
-      - "local:192.168.64.1"
+    depends_on:
+      -
 
   nginx:
     build:
@@ -24,6 +24,19 @@ services:
       - 80:80
     networks:
       - web101
+
+  web101-mongo:
+    image: mongo
+    container_name: web101-mongo
+    ports:
+      - 27027:27017
+    volumes:
+      - web101-data:/data/db
+    networks:
+      - web101
+
+olumes:
+  web101-data:
 
 networks:
   web101:
