@@ -12,7 +12,7 @@ services:
     networks:
       - web101
     depends_on:
-      -
+      - web101-mongo
 
   nginx:
     build:
