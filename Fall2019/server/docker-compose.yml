@@ -9,4 +9,20 @@ services:
     container_name: web101-server
     ports:
       - 80:80
-    network_mode: host
+    networks:
+      - web101
+
+  nginx:
+    build:
+      context: .
+      dockerfile: nginx/Dockerfile
+    image: echo-nginx
+    container_name: echo-nginx
+    ports:
+      - 80:80
+    networks:
+      - web101
+
+networks:
+  web101:
+    driver: bridge
