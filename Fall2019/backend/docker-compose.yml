@@ -4,18 +4,18 @@ services:
   go:
     build:
       context: .
-      dockerfile: server/Dockerfile
+      dockerfile: ./server/Dockerfile
     image: web101-server
     container_name: web101-server
     volumes:
-      - ./server/data:/go/src/web101/data
+      - "./server/data:/go/src/web101/data"
     networks:
       - web101
 
   nginx:
     build:
       context: .
-      dockerfile: nginx/Dockerfile
+      dockerfile: ./nginx/Dockerfile
     image: web101-nginx
     container_name: web101-nginx
     ports:
