@@ -18,6 +18,7 @@ type House struct {
 	} `json:"breadcrumb,omitempty"`
 	Pic *struct {
 		Number int      `json:"number,omitempty"`
+		Image  string   `json:"image,omitempty"`
 		Images []string `json:"images,omitempty"`
 	} `json:"pic,omitempty"`
 	Estate *struct {

@@ -32,7 +32,8 @@ func GetClient() *mongo.Client {
 }
 
 func GetHouse(client *mongo.Client, id string) *models.House {
-	cur, err := client.Database(DatabaseName).Collection(Houses).Find(context.TODO(), bson.M{"id": id})
+	opts := options.Find().SetProjection(bson.D{{"pic.image", 0}})
+	cur, err := client.Database(DatabaseName).Collection(Houses).Find(context.TODO(), bson.M{"id": id}, opts)
 	if err != nil {
 		log.Fatal("Error on Finding the document", id, err)
 	}
@@ -53,7 +54,17 @@ func GetOccasion(client *mongo.Client, limit int, skip int) *models.Occasion {
 	opts := options.Find().
 		SetSort(bson.D{{"created_at", -1}}).
 		SetSkip(int64(skip)).
-		SetLimit(int64(limit))
+		SetLimit(int64(limit)).
+		SetProjection(
+			bson.D{
+				{"parkings", 0},
+				{"_id", 0},
+				{"location.lat", 0},
+				{"location.long", 0},
+				{"breadcrumb", 0},
+				{"pic.images", 0},
+				{"estate.phone", 0},
+			})
 	cur, err := client.Database(DatabaseName).Collection(Houses).Find(context.TODO(), bson.M{}, opts)
 	if err != nil {
 		log.Fatal("Error on Finding the document ", err)
