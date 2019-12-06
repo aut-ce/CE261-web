@@ -8,19 +8,19 @@ type House struct {
 	Area     int     `json:"area,omitempty"`
 	Bedrooms int     `json:"bedrooms,omitempty"`
 	Parkings int     `json:"parkings,omitempty"`
-	Location struct {
+	Location *struct {
 		Locality string  `json:"locality,omitempty"`
 		Lat      float64 `json:"lat,omitempty"`
 		Long     float64 `json:"long,omitempty"`
 	} `json:"location,omitempty"`
-	Breadcrumb []struct {
+	Breadcrumb *[]struct {
 		Name string `json:"name,omitempty"`
 	} `json:"breadcrumb,omitempty"`
-	Pic struct {
+	Pic *struct {
 		Number int      `json:"number,omitempty"`
 		Images []string `json:"images,omitempty"`
 	} `json:"pic,omitempty"`
-	Estate struct {
+	Estate *struct {
 		Name  string `json:"name,omitempty"`
 		Logo  string `json:"logo,omitempty"`
 		Phone string `json:"phone,omitempty"`

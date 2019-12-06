@@ -38,7 +38,11 @@ func main() {
 	})
 
 	e.GET("/house/:id", func(c echo.Context) error {
-		return c.File("./data/house.json")
+		house := GetHouse(mongoClient, c.Param("id"))
+		if house == nil {
+			return c.JSON(http.StatusNotFound, "")
+		}
+		return c.JSON(http.StatusNotFound, house)
 	})
 
 	e.GET("/mags", func(c echo.Context) error {
