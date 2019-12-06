@@ -1,13 +1,13 @@
 {
   "id": "6180a",
-  "title": "خانه ۴ خوابه در الهییه",
-  "price": 29000000000.0,
+  "title": "خانه ۳ خوابه در جردن",
+  "price": 21000000000.0,
   "area": 350,
-  "bedrooms": 4,
+  "bedrooms": 3,
   "parkings": 1,
   "type": "مسکونی",
   "location": {
-    "locality": "الهیه",
+    "locality": "جردن",
     "lat": 23.45454,
     "long": 37.474742
   },
@@ -19,28 +19,29 @@
       "name": "شهر تهران"
     },
     {
-      "name": "منطقه ۱"
+      "name": "منطقه ۳"
     },
     {
-      "name": "الهییه"
+      "name": "جردن"
     }
   ],
   "pic": {
-    "number": 5,
+    "number": 6,
     "images": [
-      "http://someimage.com/a1.jpg",
-      "http://someimage.com/a2.jpg",
-      "http://someimage.com/a3.jpg",
-      "http://someimage.com/a4.jpg",
-      "http://someimage.com/a5.jpg"
+      "https://www.kilidstatic.com/photos/large/listing_193f4682-7400-4384-8599-dd753a9b08db.jpg",
+      "https://www.kilidstatic.com/photos/large/listing_2ef101ee-25be-4fe0-b164-341adde9f360.jpgر",
+      "https://www.kilidstatic.com/photos/large/listing_308120d7-2ff3-4c87-bdab-75103d205e6b.jpg",
+      "https://www.kilidstatic.com/photos/large/listing_7510213a-f859-4c4c-a801-bc00d86e0e6c.jpg",
+      "https://www.kilidstatic.com/photos/large/listing_e2dafc3c-da4d-49ee-9ed7-06befb766ee1.jpg",
+      "https://www.kilidstatic.com/photos/large/listing_f9f4c2ed-c5d4-47e2-88c5-f674bfca2405.jpg"
     ]
   },
   "estate": {
-    "name": "باراد",
-    "phone": "09122343257",
-    "logo": "http://someimage.com/logo.png"
+    "name": "مسکن شهر",
+    "logo": "https://www.kilidstatic.com/pictures/91e7153f-0788-43f3-8926-ab3bb8d48e47.jpg",
+    "phone": "09122343257"
   },
-  "star": true,
+  "star": false,
   "bookmarked": false,
   "created_at": 1574836689
 }
