@@ -47,6 +47,29 @@ func GetHouse(client *mongo.Client, id string) *models.House {
 	return nil
 }
 
+func GetOccasion(client *mongo.Client, limit int, skip int) *models.Occasion {
+	var occasion models.Occasion
+
+	opts := options.Find().
+		SetSort(bson.D{{"created_at", -1}}).
+		SetSkip(int64(skip)).
+		SetLimit(int64(limit))
+	cur, err := client.Database(DatabaseName).Collection(Houses).Find(context.TODO(), bson.M{}, opts)
+	if err != nil {
+		log.Fatal("Error on Finding the document ", err)
+	}
+
+	for cur.Next(context.TODO()) {
+		var house models.House
+		err = cur.Decode(&house)
+		if err != nil {
+			log.Fatal("Error on Decoding the document", err)
+		}
+		occasion.Items = append(occasion.Items, house)
+	}
+	return &occasion
+}
+
 func GetAllMagazine(client *mongo.Client) *models.MagazineResponse {
 	var mags models.MagazineResponse
 

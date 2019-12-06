@@ -5,6 +5,7 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/readpref"
 	"log"
 	"net/http"
+	"strconv"
 
 	"github.com/labstack/echo"
 
@@ -12,7 +13,17 @@ import (
 )
 
 const (
+	// URL
+	//BaseUrl = "http://hallows.ir"
+	BaseUrl = "http://localhost"
+	// Magazine
 	MagazineTitle = "کیلید مگ را بخوانید"
+
+	// Occasion
+	OccasionTitle      = "اکازیون های امروز کیلید"
+	LimitOccasion      = 4
+	EndOccasion        = 8
+	OccasionActionText = "اکازیون های بیشتر در کیلید"
 )
 
 func main() {
@@ -38,7 +49,43 @@ func main() {
 	})
 
 	e.GET("/occasion", func(c echo.Context) error {
-		return c.File("./data/occasion.json")
+		occasion := GetOccasion(mongoClient, LimitOccasion, 0)
+		occasion.Section = OccasionTitle
+		occasion.Action = (*struct {
+			Text string `json:"text,omitempty"`
+			URL  string `json:"url,omitempty"`
+		})(&struct {
+			Text string
+			URL  string
+		}{
+			Text: OccasionActionText,
+			URL:  BaseUrl + "/occasion/" + strconv.Itoa(LimitOccasion),
+		})
+		return c.JSON(http.StatusOK, occasion)
+	})
+
+	e.GET("/occasion/:skipped", func(c echo.Context) error {
+		skipped, err := strconv.Atoi(c.Param("skipped"))
+		if err != nil {
+			return c.JSON(http.StatusBadRequest, "")
+		}
+
+		occasion := GetOccasion(mongoClient, LimitOccasion, skipped)
+		occasion.Section = OccasionTitle
+
+		if skipped+LimitOccasion < EndOccasion {
+			occasion.Action = (*struct {
+				Text string `json:"text,omitempty"`
+				URL  string `json:"url,omitempty"`
+			})(&struct {
+				Text string
+				URL  string
+			}{
+				Text: OccasionActionText,
+				URL:  BaseUrl + "/occasion/" + strconv.Itoa(LimitOccasion+skipped),
+			})
+		}
+		return c.JSON(http.StatusOK, occasion)
 	})
 
 	e.GET("/house/:id", func(c echo.Context) error {
