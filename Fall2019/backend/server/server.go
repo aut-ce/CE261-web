@@ -2,13 +2,25 @@ package main
 
 import (
 	"github.com/labstack/echo/middleware"
+	"go.mongodb.org/mongo-driver/mongo/readpref"
+	"log"
 	"net/http"
 
 	"github.com/labstack/echo"
+
+	"context"
 )
 
 func main() {
 	e := echo.New()
+
+	mongoClient := GetClient()
+	err := mongoClient.Ping(context.Background(), readpref.Primary())
+	if err != nil {
+		log.Fatal("Couldn't connect to the database", err)
+	} else {
+		log.Println("Connected!")
+	}
 
 	// try to allow cors from anywhere
 	e.Use(middleware.CORS())
@@ -20,12 +32,15 @@ func main() {
 	e.GET("/chart", func(c echo.Context) error {
 		return c.File("./data/chart.json")
 	})
+
 	e.GET("/occasion", func(c echo.Context) error {
 		return c.File("./data/occasion.json")
 	})
+
 	e.GET("/house/:id", func(c echo.Context) error {
 		return c.File("./data/house.json")
 	})
+
 	e.GET("/mags", func(c echo.Context) error {
 		return c.File("./data/mags.json")
 	})
