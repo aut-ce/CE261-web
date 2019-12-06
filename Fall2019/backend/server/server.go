@@ -11,6 +11,10 @@ import (
 	"context"
 )
 
+const (
+	MagazineTitle = "کیلید مگ را بخوانید"
+)
+
 func main() {
 	e := echo.New()
 
@@ -42,11 +46,13 @@ func main() {
 		if house == nil {
 			return c.JSON(http.StatusNotFound, "")
 		}
-		return c.JSON(http.StatusNotFound, house)
+		return c.JSON(http.StatusOK, house)
 	})
 
 	e.GET("/mags", func(c echo.Context) error {
-		return c.File("./data/mags.json")
+		mags := GetAllMagazine(mongoClient)
+		mags.Section = MagazineTitle
+		return c.JSON(http.StatusOK, mags)
 	})
 
 	e.Logger.Fatal(e.Start(":80"))

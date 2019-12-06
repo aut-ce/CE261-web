@@ -46,3 +46,21 @@ func GetHouse(client *mongo.Client, id string) *models.House {
 	}
 	return nil
 }
+
+func GetAllMagazine(client *mongo.Client) *models.MagazineResponse {
+	var mags models.MagazineResponse
+
+	cur, err := client.Database(DatabaseName).Collection(Mags).Find(context.TODO(), bson.M{})
+	if err != nil {
+		log.Fatal("Error on Finding the documents", err)
+	}
+	for cur.Next(context.TODO()) {
+		var mag models.Magazine
+		err = cur.Decode(&mag)
+		if err != nil {
+			log.Fatal("Error on Decoding the document", err)
+		}
+		mags.Items = append(mags.Items, mag)
+	}
+	return &mags
+}
