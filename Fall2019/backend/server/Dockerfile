@@ -1,6 +1,6 @@
 FROM golang:1.12.5
 
-RUN apk add git
+RUN apt-get install git
 
 WORKDIR /go/src/web101
 COPY ./server/ .
