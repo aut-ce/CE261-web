@@ -1,12 +1,12 @@
 package models
 
 type Magazine struct {
-	ID    string `json:"id,omitempty"`
-	Image string `json:"image,omitempty"`
-	Title string `json:"title,omitempty"`
+	ID    string `json:"id"`
+	Image string `json:"image"`
+	Title string `json:"title"`
 }
 
 type MagazineResponse struct {
-	Section string     `json:"section,omitempty"`
-	Items   []Magazine `json:"items,omitempty"`
+	Section string     `json:"section"`
+	Items   []Magazine `json:"items"`
 }
