@@ -24,6 +24,10 @@ const (
 	LimitOccasion      = 4
 	EndOccasion        = 8
 	OccasionActionText = "اکازیون های بیشتر در کیلید"
+
+	//Chart
+	SelectedColor = "#ffdf00"
+	OtherColor    = "#ff5f00"
 )
 
 func main() {
@@ -45,7 +49,11 @@ func main() {
 	})
 
 	e.GET("/chart", func(c echo.Context) error {
-		return c.File("./data/chart.json")
+		chart := GetAllChartHouse(mongoClient)
+		chart.SelectedColor = SelectedColor
+		chart.OtherColor = OtherColor
+
+		return c.JSON(http.StatusOK, chart)
 	})
 
 	e.GET("/occasion", func(c echo.Context) error {

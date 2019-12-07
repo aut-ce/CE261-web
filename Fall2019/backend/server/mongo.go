@@ -91,3 +91,24 @@ func GetAllMagazine(client *mongo.Client) *models.MagazineResponse {
 	}
 	return &mags
 }
+
+func GetAllChartHouse(client *mongo.Client) *models.Chart {
+	var chart models.Chart
+
+	cur, err := client.Database(DatabaseName).Collection(Houses).Find(context.TODO(), bson.M{})
+	if err != nil {
+		log.Fatal("Error on Finding the document ", err)
+	}
+
+	for cur.Next(context.TODO()) {
+		var house models.ChartHouse
+		err = cur.Decode(&house)
+		if err != nil {
+			log.Fatal("Error on Decoding the document", err)
+		}
+
+		chart.Data = append(chart.Data, house)
+	}
+
+	return &chart
+}
