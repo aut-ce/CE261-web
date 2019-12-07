@@ -10,7 +10,7 @@ import (
 )
 
 const (
-	MongoUrl     = "mongodb://localhost:27017"
+	MongoUrl     = "mongodb://82.102.10.78:27017"
 	DatabaseName = "kilid"
 	// collections
 	Houses = "houses"

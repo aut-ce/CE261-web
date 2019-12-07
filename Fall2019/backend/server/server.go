@@ -14,8 +14,8 @@ import (
 
 const (
 	// URL
-	//BaseUrl = "http://hallows.ir"
-	BaseUrl = "http://localhost"
+	BaseUrl = "http://hallows.ir"
+	//BaseUrl = "http://localhost"
 	// Magazine
 	MagazineTitle = "کیلید مگ را بخوانید"
 
