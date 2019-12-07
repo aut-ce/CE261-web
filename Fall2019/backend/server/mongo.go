@@ -4,10 +4,9 @@ import (
 	"context"
 	"github.com/aut-ce/Web101/models"
 	"go.mongodb.org/mongo-driver/bson"
-	"log"
-
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
+	"log"
 )
 
 const (
@@ -32,8 +31,7 @@ func GetClient() *mongo.Client {
 }
 
 func GetHouse(client *mongo.Client, id string) *models.House {
-	opts := options.Find().SetProjection(bson.D{{"pic.image", 0}})
-	cur, err := client.Database(DatabaseName).Collection(Houses).Find(context.TODO(), bson.M{"id": id}, opts)
+	cur, err := client.Database(DatabaseName).Collection(Houses).Find(context.TODO(), bson.M{"id": id})
 	if err != nil {
 		log.Fatal("Error on Finding the document", id, err)
 	}
@@ -43,6 +41,8 @@ func GetHouse(client *mongo.Client, id string) *models.House {
 		if err != nil {
 			log.Fatal("Error on Decoding the document", err)
 		}
+		house.CreatedAt = house.Ca
+		house.Ca = 0
 		return &house
 	}
 	return nil
@@ -54,28 +54,21 @@ func GetOccasion(client *mongo.Client, limit int, skip int) *models.Occasion {
 	opts := options.Find().
 		SetSort(bson.D{{"created_at", -1}}).
 		SetSkip(int64(skip)).
-		SetLimit(int64(limit)).
-		SetProjection(
-			bson.D{
-				{"parkings", 0},
-				{"_id", 0},
-				{"location.lat", 0},
-				{"location.long", 0},
-				{"breadcrumb", 0},
-				{"pic.images", 0},
-				{"estate.phone", 0},
-			})
+		SetLimit(int64(limit))
 	cur, err := client.Database(DatabaseName).Collection(Houses).Find(context.TODO(), bson.M{}, opts)
 	if err != nil {
 		log.Fatal("Error on Finding the document ", err)
 	}
 
 	for cur.Next(context.TODO()) {
-		var house models.House
+		var house models.OccasionHouse
 		err = cur.Decode(&house)
 		if err != nil {
 			log.Fatal("Error on Decoding the document", err)
 		}
+		house.CreatedAt = house.Ca
+		house.Ca = 0
+
 		occasion.Items = append(occasion.Items, house)
 	}
 	return &occasion

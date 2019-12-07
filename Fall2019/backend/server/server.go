@@ -52,8 +52,8 @@ func main() {
 		occasion := GetOccasion(mongoClient, LimitOccasion, 0)
 		occasion.Section = OccasionTitle
 		occasion.Action = (*struct {
-			Text string `json:"text,omitempty"`
-			URL  string `json:"url,omitempty"`
+			Text string `json:"text"`
+			URL  string `json:"url"`
 		})(&struct {
 			Text string
 			URL  string
@@ -75,8 +75,8 @@ func main() {
 
 		if skipped+LimitOccasion < EndOccasion {
 			occasion.Action = (*struct {
-				Text string `json:"text,omitempty"`
-				URL  string `json:"url,omitempty"`
+				Text string `json:"text"`
+				URL  string `json:"url"`
 			})(&struct {
 				Text string
 				URL  string

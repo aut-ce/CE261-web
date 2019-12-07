@@ -18,7 +18,6 @@ type House struct {
 	} `json:"breadcrumb"`
 	Pic *struct {
 		Number int      `json:"number"`
-		Image  string   `json:"image"`
 		Images []string `json:"images"`
 	} `json:"pic"`
 	Estate *struct {
@@ -29,4 +28,5 @@ type House struct {
 	Star       bool `json:"star"`
 	Bookmarked bool `json:"bookmarked"`
 	CreatedAt  int  `json:"created_at"`
+	Ca         int  `json:"ca,omitempty"`
 }
