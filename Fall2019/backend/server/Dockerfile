@@ -6,7 +6,6 @@ WORKDIR /go/src/github.com/aut-ce/Web101
 COPY ./server/ .
 RUN rm -rf /data/*
 
-RUN go get -d -v ./...
-RUN go install -v ./...
+RUN go mod download
 
 CMD ["Web101"]
