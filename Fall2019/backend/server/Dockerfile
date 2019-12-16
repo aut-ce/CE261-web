@@ -1,11 +1,30 @@
-FROM golang:1.12.5
+FROM golang:1.12.5 as builder
 
-RUN apt-get install git
+# Set the Current Working Directory inside the container
+WORKDIR /app/
 
-WORKDIR /go/src/github.com/aut-ce/Web101
-COPY ./server/ .
-RUN rm -rf /data/*
+# Copy go mod and sum files
+COPY ./server/go.mod ./server/go.sum ./
 
+# Download all dependencies. Dependencies will be cached if the go.mod and go.sum files are not changed
 RUN go mod download
 
-CMD ["Web101"]
+# Copy the source from the current directory to the Working Directory inside the container
+COPY ./server .
+RUN rm -rf /data/*
+
+# Build the Go app
+RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o main ./cmd
+
+######## Start a new stage from scratch #######
+FROM alpine:latest
+
+RUN apk --no-cache add ca-certificates
+
+WORKDIR /root/
+
+# Copy the Pre-built binary file from the previous stage
+COPY --from=builder /app/server/main .
+
+# Command to run the executable
+CMD ["./main"]
