@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/aut-ce/Web101/mongo"
 	"github.com/labstack/echo/middleware"
 	"go.mongodb.org/mongo-driver/mongo/readpref"
 	"log"
@@ -33,7 +34,7 @@ const (
 func main() {
 	e := echo.New()
 
-	mongoClient := GetClient()
+	mongoClient := mongo.GetClient()
 	err := mongoClient.Ping(context.Background(), readpref.Primary())
 	if err != nil {
 		log.Fatal("Couldn't connect to the database", err)
@@ -58,7 +59,7 @@ func main() {
 	})
 
 	e.GET("/chart", func(c echo.Context) error {
-		chart := GetAllChartHouse(mongoClient)
+		chart := mongo.GetAllChartHouse(mongoClient)
 		chart.SelectedColor = SelectedColor
 		chart.OtherColor = OtherColor
 
@@ -66,7 +67,7 @@ func main() {
 	})
 
 	e.GET("/occasion", func(c echo.Context) error {
-		occasion := GetOccasion(mongoClient, LimitOccasion, 0)
+		occasion := mongo.GetOccasion(mongoClient, LimitOccasion, 0)
 		occasion.Section = OccasionTitle
 		occasion.Action = (*struct {
 			Text string `json:"text"`
@@ -87,7 +88,7 @@ func main() {
 			return c.JSON(http.StatusBadRequest, "")
 		}
 
-		occasion := GetOccasion(mongoClient, LimitOccasion, skipped)
+		occasion := mongo.GetOccasion(mongoClient, LimitOccasion, skipped)
 		occasion.Section = OccasionTitle
 
 		if skipped+LimitOccasion < EndOccasion {
@@ -106,7 +107,7 @@ func main() {
 	})
 
 	e.GET("/house/:id", func(c echo.Context) error {
-		house := GetHouse(mongoClient, c.Param("id"))
+		house := mongo.GetHouse(mongoClient, c.Param("id"))
 		if house == nil {
 			return c.JSON(http.StatusNotFound, "")
 		}
@@ -114,7 +115,7 @@ func main() {
 	})
 
 	e.GET("/mags", func(c echo.Context) error {
-		mags := GetAllMagazine(mongoClient)
+		mags := mongo.GetAllMagazine(mongoClient)
 		mags.Section = MagazineTitle
 		return c.JSON(http.StatusOK, mags)
 	})
