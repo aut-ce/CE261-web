@@ -8,7 +8,7 @@ services:
     image: web101-server
     container_name: web101-server
     volumes:
-      - "./server/data:/go/src/web101/data"
+      - "./server/data:/app/data"
     networks:
       - web101
   nginx:
