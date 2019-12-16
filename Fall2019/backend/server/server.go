@@ -43,6 +43,15 @@ func main() {
 
 	// try to allow cors from anywhere
 	e.Use(middleware.CORS())
+	e.Use(func(handlerFunc echo.HandlerFunc) echo.HandlerFunc {
+		return func(c echo.Context) error {
+			c.Response().Header().Set("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
+			c.Response().Header().Set("Access-Control-Allow-Headers", "Content-Type,Cache-Control,Pragma")
+			c.Response().Header().Set("Access-Control-Max-Age", "2592000")
+			return nil
+		}
+
+	})
 
 	e.GET("/", func(c echo.Context) error {
 		return c.String(http.StatusOK, "The hallows.ir server is up")
