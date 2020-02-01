@@ -18,17 +18,17 @@ const (
 	BaseUrl = "http://hallows.ir"
 	//BaseUrl = "http://localhost"
 	// Magazine
-	MagazineTitle = "کیلید مگ را بخوانید"
+	MagazineTitle = "مطالب مجیله مگ"
 
 	// Occasion
-	OccasionTitle      = "اکازیون های امروز کیلید"
+	OccasionTitle      = "خونه های خالی امروز کیلید"
 	LimitOccasion      = 4
 	EndOccasion        = 8
-	OccasionActionText = "اکازیون های بیشتر در کیلید"
+	OccasionActionText = "خونه‌های بیشتر"
 
 	//Chart
-	SelectedColor = "#ffdf00"
-	OtherColor    = "#ff5f00"
+	SelectedColor = "#00dfff"
+	OtherColor    = "#ff005f"
 )
 
 func main() {
